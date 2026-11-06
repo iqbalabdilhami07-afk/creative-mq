@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creative MQ by Imran & Iqbal — Jasa Edit Video</title>
+<meta name="description" content="Creative MQ by Imran &amp; Iqbal: jasa edit video untuk tugas kuliah dan after movie acara. Juara 2 Short Video Competition KST PTKI II 2026 dan juara 3 Spotlight Competition AICIS 2026.">
+<meta name="theme-color" content="#f0ebe1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+/* ---------- dasar ---------- */
+:root{
+  --paper:#f0ebe1; --paper-2:#e7e0d2; --ink:#14120e; --muted:#5c564b;
+  --line:rgba(20,18,14,.2); --red:#d4361b; --pill:#fbf8f1;
+  --gutter:clamp(20px,5vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:.9375rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-variant-numeric:tabular-nums}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--paper);padding:10px 14px;border-radius:2px;z-index:100;font-size:.85rem}
+.skip:focus{top:12px}
+section{padding:clamp(44px,6vw,72px) 0;scroll-margin-top:60px}
+
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.15}
+h2{font-size:clamp(1.5rem,3vw,1.9rem)}
+.label{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;gap:12px;align-items:center}
+.label b{color:var(--red);font-weight:600}
+
+/* penggaris timeline */
+.ruler{--c:var(--ink);height:13px;border-bottom:1px solid var(--c);
+  background:
+    linear-gradient(90deg,var(--c) 1px,transparent 1px) 0 100%/10px 6px repeat-x,
+    linear-gradient(90deg,var(--c) 1px,transparent 1px) 0 100%/50px 13px repeat-x}
+
+.btn{display:inline-flex;align-items:center;gap:12px;padding:12px 20px;background:var(--ink);color:var(--paper);border-radius:2px;font-weight:600;font-size:.9rem;transition:background .2s,color .2s}
+.btn:hover{background:var(--red);color:#fff}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(5px)}
+.link{font-weight:600;font-size:.9rem;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:color .2s,border-color .2s}
+.link:hover{color:var(--red);border-color:var(--red)}
+
+/* ---------- menu pil melayang ---------- */
+.pillnav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:2px;padding:6px;background:var(--pill);border-radius:999px;box-shadow:0 8px 28px -14px rgba(20,18,14,.5),0 0 0 1px rgba(20,18,14,.06);max-width:calc(100vw - 20px)}
+.pillnav a{padding:10px 24px;border-radius:999px;font-size:.88rem;font-weight:500;white-space:nowrap;transition:background .2s}
+.pillnav a:hover{background:rgba(20,18,14,.08)}
+.pillnav a.on{background:var(--ink);color:var(--paper);font-weight:600}
+@media(max-width:560px){.pillnav{top:12px;padding:4px}.pillnav a{padding:9px 11px;font-size:.76rem}}
+
+/* ---------- beranda: kartu kiri | teks | kartu kanan ---------- */
+.hero{padding:clamp(92px,10vw,116px) 0 clamp(32px,4vw,48px)}
+.hero h1{font-size:clamp(2rem,4.6vw,2.9rem);letter-spacing:-.03em;line-height:1.1;margin:14px 0 12px;overflow-wrap:anywhere}
+.hero h1 .by{display:block;font-size:.42em;font-weight:500;letter-spacing:0;color:var(--muted);margin-top:8px}
+.hero-grid{display:grid;gap:clamp(28px,4vw,56px);grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"text text" "l r";align-items:start}
+@media(min-width:900px){.hero-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr) minmax(0,.8fr);grid-template-areas:"l text r";align-items:center}}
+.g-l{grid-area:l}.g-r{grid-area:r}
+.g-text{grid-area:text;display:flex;flex-direction:column;align-items:center;text-align:center}
+.g-text .label{justify-content:center}
+.g-text .name-meaning,.g-text .bgtext{margin-left:auto;margin-right:auto}
+.g-text .bgtext{max-width:56ch}
+.g-text .hero-cta{justify-content:center}
+.name-meaning{font-weight:600;font-size:.95rem;line-height:1.5;margin-bottom:12px;max-width:44ch}
+.bgtext{color:#2c2820;max-width:48ch;margin-bottom:22px}
+.hero-cta{display:flex;gap:26px;flex-wrap:wrap;align-items:center}
+.hint{text-align:center;margin-top:clamp(56px,7vw,72px);font-size:.8rem;color:var(--muted);transition:opacity .3s}
+.hint.gone{opacity:0}
+
+/* bingkai foto menggantung */
+.frame{position:relative;width:min(215px,100%);margin:0 auto;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.swing{position:relative;padding-top:40px;transform-origin:50% 0;will-change:transform}
+.nail{position:absolute;top:-5px;left:50%;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6b655a,var(--ink) 60%);z-index:2}
+.strings{position:absolute;top:0;left:0;width:100%;height:40px;overflow:visible}
+.strings line{stroke:var(--ink);stroke-opacity:.55;stroke-width:1.2}
+.polaroid{position:relative;background:#fffdf7;padding:7px;border-radius:2px;box-shadow:0 1px 2px rgba(20,18,14,.25),0 20px 38px -12px rgba(20,18,14,.45);transition:transform .2s}
+.frame:hover .polaroid{transform:scale(1.03)}
+.frame:active .polaroid{transform:scale(.97)}
+.frame:focus-visible .polaroid{outline:2px solid var(--red);outline-offset:4px}
+.polaroid::before{content:"";position:absolute;top:-10px;left:50%;width:58px;height:19px;margin-left:-29px;background:var(--tape,#e9d9a8);opacity:.88;transform:rotate(-4deg);border-radius:1px;box-shadow:0 1px 3px rgba(20,18,14,.25);z-index:3}
+.ph{position:relative;aspect-ratio:2/3;overflow:hidden;background:#5c564b}
+.ph::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;background:linear-gradient(to top,rgba(14,12,9,.72),transparent);pointer-events:none}
+.phimg{position:absolute;inset:0}
+.phimg img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ph-empty{height:100%;display:grid;place-content:center;gap:6px;text-align:center;padding:14px;color:#e6dfd2;font-size:.78rem}
+.ph-empty span{font-size:2.4rem}
+.nm{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;color:#fff;text-align:left}
+.nm b{display:block;font-size:clamp(1rem,1.7vw,1.3rem);font-weight:600;line-height:1.2;letter-spacing:-.01em}
+.nm span{display:block;margin-top:4px;font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;opacity:.88}
+.sticker{position:absolute;right:-9px;top:20px;font-size:1.65rem;transform:rotate(12deg);filter:drop-shadow(0 3px 3px rgba(20,18,14,.3));transition:transform .25s cubic-bezier(.3,1.6,.5,1);z-index:4}
+.frame:hover .sticker{transform:rotate(-10deg) scale(1.2)}
+.bubble{position:absolute;left:50%;top:calc(100% + 8px);transform:translateX(-50%) scale(.6);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);font-size:.78rem;font-weight:500;line-height:1.4;padding:9px 13px;border-radius:3px;width:max-content;max-width:min(190px,44vw);text-align:center;transition:.2s cubic-bezier(.3,1.6,.5,1);z-index:6}
+.bubble::before{content:"";position:absolute;top:-6px;left:50%;margin-left:-6px;border:6px solid transparent;border-top:0;border-bottom-color:var(--ink)}
+.bubble.show{opacity:1;transform:translateX(-50%) scale(1)}
+.pop{position:absolute;pointer-events:none;font-size:1.15rem;opacity:0;animation:floatUp 1s ease-out forwards;z-index:7}
+@keyframes floatUp{0%{opacity:1;transform:translate(-50%,0) scale(.6)}100%{opacity:0;transform:translate(calc(-50% + var(--dx,0px)),-80px) scale(1.3)}}
+
+/* ---------- header section ---------- */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(20px,3vw,30px)}
+.sec-head h2{margin-top:14px}
+.sec-sub{color:var(--muted);max-width:52ch;margin-top:8px;font-size:.9rem}
+.seg{display:flex;gap:26px}
+.seg button{padding:6px 0;font-weight:600;font-size:.92rem;color:var(--muted);border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{color:var(--ink);border-color:var(--red)}
+
+/* ---------- tentang ---------- */
+.about{display:grid;gap:28px;grid-template-columns:1fr}
+@media(min-width:900px){.about{grid-template-columns:minmax(0,.35fr) minmax(0,.65fr);gap:56px}}
+.about h2{margin-top:14px}
+.about-text{font-size:clamp(1.05rem,1.8vw,1.3rem);font-weight:500;line-height:1.5;letter-spacing:-.01em}
+.about-text .who,.about-note .who{font-weight:800}
+.duo{position:relative;margin-top:26px;max-width:340px;background:#fffdf7;padding:8px 8px 10px;border-radius:2px;transform:rotate(-1.4deg);box-shadow:0 1px 2px rgba(20,18,14,.25),0 20px 38px -12px rgba(20,18,14,.4)}
+.duo::before{content:"";position:absolute;top:-10px;left:50%;width:58px;height:19px;margin-left:-29px;background:#e9d9a8;opacity:.88;transform:rotate(-3deg);border-radius:1px;box-shadow:0 1px 3px rgba(20,18,14,.25);z-index:2}
+.duo .ph2{aspect-ratio:4/3;overflow:hidden;background:#5c564b;color:#e6dfd2}
+.duo .ph2 img{width:100%;height:100%;object-fit:cover}
+.duo figcaption{padding-top:8px;text-align:center;font-size:.8rem;font-weight:600;color:var(--ink)}
+.about-note{margin-top:16px;max-width:56ch;color:var(--muted);font-size:.9rem}
+.about-note .who{color:var(--ink)}
+.awards{list-style:none;margin-top:14px;border-top:1px solid var(--ink)}
+.awards li{display:grid;grid-template-columns:72px 1fr;gap:14px;padding:11px 0;font-size:.9rem;border-bottom:1px solid var(--line);font-weight:500}
+.awards time{font-size:.8rem;font-weight:600;color:var(--red);padding-top:2px}
+
+/* ---------- karya: galeri kartu + jendela pesan ---------- */
+.filters{display:flex;flex-direction:column;gap:14px;margin-bottom:26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:6px 14px;border:1px solid var(--line);border-radius:2px;font-size:.8rem;font-weight:500;transition:background .2s,color .2s,border-color .2s}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cards{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
+.vcard{display:flex;flex-direction:column;height:100%;text-align:left;background:var(--pill);border:1px solid var(--line);border-radius:2px;overflow:hidden;transition:border-color .2s,transform .2s}
+.vcard:hover{border-color:var(--ink);transform:translateY(-3px)}
+.vc-top{display:flex;align-items:center;gap:9px;padding:10px 12px}
+.av{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:.62rem;font-weight:700;letter-spacing:.02em}
+.vc-who b{display:block;font-size:.8rem;font-weight:600;line-height:1.25}
+.vc-who span{display:block;font-size:.7rem;color:var(--muted);line-height:1.25}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--ink);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.vcard:hover .thumb img{transform:scale(1.04)}
+.thumb .nosig{font-size:.72rem}
+.vc-play{position:absolute;left:10px;bottom:10px;width:30px;height:30px;background:var(--paper);display:grid;place-items:center;border-radius:2px;transition:background .2s}
+.vc-play::after{content:"";margin-left:2px;border-left:9px solid var(--ink);border-top:6px solid transparent;border-bottom:6px solid transparent;transition:border-color .2s}
+.vcard:hover .vc-play{background:var(--red)}
+.vcard:hover .vc-play::after{border-left-color:#fff}
+.vc-body{display:flex;flex-direction:column;gap:10px;padding:12px;flex:1}
+.vc-title{font-weight:600;font-size:.9rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tag{align-self:flex-start;font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);padding:3px 8px;border-radius:2px;color:var(--muted)}
+.vc-price{margin-top:auto;padding-top:6px;text-align:right;line-height:1.25}
+.vc-price small{display:block;font-size:.72rem;color:var(--muted)}
+.vc-price b{font-size:1rem;font-weight:700;color:var(--red)}
+.vc-more{margin-top:auto;padding-top:6px;text-align:right;font-size:.8rem;font-weight:600;transition:color .2s}
+.vcard:hover .vc-more{color:var(--red)}
+.empty-note{padding:40px 0;color:var(--muted)}
+.dl-ask{font-size:.9rem;color:#2c2820;margin-bottom:18px;max-width:44ch}
+
+.screen{position:relative;aspect-ratio:16/9;background:var(--ink);overflow:hidden}
+.screen>img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.play{position:absolute;left:16px;bottom:16px;display:flex;align-items:center;gap:12px;background:var(--paper);color:var(--ink);padding:10px 16px 10px 13px;border-radius:2px;font-weight:600;font-size:.85rem;transition:background .2s,color .2s}
+.play:hover{background:var(--red);color:#fff}
+.play i{width:0;height:0;border-left:11px solid currentColor;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.nosig{position:absolute;inset:0;display:grid;place-content:center;gap:4px;text-align:center;color:#b9b3a6;font-size:.82rem;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 4px),var(--ink)}
+.nosig b{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);font-weight:600}
+
+.dlg{border:0;padding:0;background:var(--paper);color:var(--ink);width:min(980px,calc(100% - 24px));max-height:calc(100dvh - 24px);margin:auto;border-radius:2px;box-shadow:0 30px 80px -20px rgba(20,18,14,.7);overflow:auto;overscroll-behavior:contain}
+.dlg::backdrop{background:rgba(20,18,14,.62)}
+.dlg-in{position:relative;display:grid;grid-template-columns:1fr}
+@media(min-width:820px){.dlg-in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+.dlg-x{position:absolute;top:10px;right:10px;z-index:5;width:38px;height:38px;display:grid;place-items:center;background:var(--paper);border:1px solid var(--line);border-radius:2px;font-size:1.2rem;line-height:1;transition:background .2s,color .2s}
+.dlg-x:hover{background:var(--ink);color:var(--paper)}
+.dl-left{background:var(--paper-2)}
+.dl-info{padding:22px 24px 26px}
+.dl-info h3{font-size:clamp(1.1rem,2vw,1.3rem);letter-spacing:-.015em;line-height:1.25;margin:10px 0 8px}
+.dl-info p{color:#2c2820;font-size:.9rem;max-width:52ch}
+.dl-right{padding:56px 24px 26px}
+@media(min-width:820px){.dl-right{padding:26px 28px;border-left:1px solid var(--line)}}
+.dl-right h4{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.opts{display:grid;gap:10px;margin-bottom:18px}
+.opt{position:relative;display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:13px 16px;border:1px solid var(--line);border-radius:2px;cursor:pointer;background:var(--pill);transition:border-color .2s,background .2s}
+.opt:hover{border-color:var(--ink)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt.on{border-color:var(--ink);background:#fffdf7;box-shadow:inset 3px 0 0 var(--red)}
+.opt:focus-within{outline:2px solid var(--red);outline-offset:2px}
+.opt b{font-size:1rem;font-weight:700;letter-spacing:-.01em}
+.opt .pr2{font-weight:700;color:var(--red);white-space:nowrap}
+.opt small{grid-column:1/-1;color:var(--muted);font-size:.8rem;line-height:1.5}
+.opt .picktag{display:block;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-top:1px}
+.dl-add{font-size:.82rem;color:var(--muted);margin-bottom:18px}
+.dl-add b{color:var(--ink)}
+.dl-cta{width:100%;justify-content:space-between}
+.dl-note{margin-top:12px;font-size:.78rem;color:var(--muted)}
+
+/* ---------- kartu seragam (harga & cara pesan): ikon, judul pendek, satu baris penjelasan ---------- */
+#harga{background:var(--paper-2)}
+.rate-note{font-size:.88rem;color:var(--muted);max-width:62ch;margin-bottom:18px}
+.rates,.steps{list-style:none;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.rate,.step{position:relative;display:flex;flex-direction:column;gap:6px;padding:18px;background:var(--pill);border:1px solid var(--line);border-radius:2px;transition:border-color .2s,transform .2s}
+.rate:hover{border-color:var(--ink);transform:translateY(-3px)}
+.ico{flex:none;width:34px;height:34px;display:grid;place-items:center;background:var(--ink);color:var(--paper);border-radius:2px;font-size:.78rem;font-weight:700;letter-spacing:.02em;margin-bottom:6px}
+.rate .ico{background:rgba(212,54,27,.12);color:var(--red)}
+.rate h3,.step h3{font-size:1rem;letter-spacing:-.01em;font-weight:700;line-height:1.3}
+.rate .sub,.step p{font-size:.84rem;color:var(--muted);line-height:1.5}
+.pick{display:inline-block;margin-left:8px;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red);vertical-align:middle}
+.rate .pr{margin-top:auto;padding-top:10px;font-weight:700;font-size:1.2rem;letter-spacing:-.02em;color:var(--ink)}
+.rate .pr small{font-weight:500;font-size:.74rem;color:var(--muted);margin-right:6px;letter-spacing:0}
+.rate .go{position:absolute;top:18px;right:18px;font-size:1rem;transition:transform .2s,color .2s}
+.rate:hover .go{transform:translateX(4px);color:var(--red)}
+.addons{margin-top:16px;font-size:.84rem;color:var(--muted)}
+.addons b{color:var(--ink)}
+
+/* ---------- kontak ---------- */
+.closing{background:var(--ink);color:var(--paper);padding:clamp(48px,7vw,80px) 0 0}
+.closing h2{font-size:clamp(1.6rem,3.8vw,2.4rem);line-height:1.12;letter-spacing:-.025em;max-width:20ch}
+.closing p{color:#b9b3a6;max-width:46ch;margin:14px 0 24px}
+.closing .btn{background:var(--paper);color:var(--ink)}
+.closing .btn:hover{background:var(--red);color:#fff}
+.closing .ruler{--c:rgba(240,235,225,.55);margin-top:clamp(40px,6vw,64px)}
+.foot{padding:18px 0 28px;font-size:.82rem;color:#a39d90;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.fab{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--ink);color:var(--paper);padding:12px 18px;border-radius:2px;font-weight:600;font-size:.88rem;transform:translateY(160%);transition:transform .3s,background .2s;box-shadow:0 10px 26px -10px rgba(20,18,14,.6)}
+.fab.show{transform:none}
+.fab:hover{background:var(--red);color:#fff}
+
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#top">Lewati ke konten</a>
+
+<nav class="pillnav" aria-label="Navigasi utama">
+  <a href="#top" data-k="home" class="on" aria-current="true">Home</a>
+  <a href="#tentang" data-k="about">About</a>
+  <a href="#karya" data-k="project">Project</a>
+  <a href="#harga" data-k="service">Service</a>
+  <a href="#penutup" data-k="contact">Contact Me</a>
+</nav>
+
+<main>
+<section class="hero" id="top" data-nav="home">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="g-l"><div class="frame-slot" id="frameL"></div></div>
+
+      <div class="g-text">
+        <p class="label">Videografi · Fotografi · Edit video</p>
+        <h1><span id="heroTitle"></span><span class="by" id="heroBy"></span></h1>
+        <p class="name-meaning" id="nameMeaning"></p>
+        <p class="bgtext" id="bgText"></p>
+        <div class="hero-cta">
+          <a class="btn" id="heroWa" target="_blank" rel="noopener">Chat lewat WhatsApp <span class="arr" aria-hidden="true">→</span></a>
+          <a class="link" href="#karya">Lihat karya</a>
+        </div>
+      </div>
+
+      <div class="g-r"><div class="frame-slot" id="frameR"></div></div>
+    </div>
+    <p class="hint" id="hint">Coba colek bingkai fotonya 👆</p>
+  </div>
+</section>
+<div class="ruler" aria-hidden="true"></div>
+
+<section id="tentang" data-nav="about">
+  <div class="wrap about">
+    <div data-rv>
+      <p class="label"><b>01</b> Tentang</p>
+      <h2>Di balik layar.</h2>
+      <figure class="duo">
+        <div class="ph2" id="duoPhoto"></div>
+        <figcaption id="duoCap"></figcaption>
+      </figure>
+    </div>
+    <div data-rv>
+      <p class="about-text" id="aboutText"></p>
+      <p class="about-note" id="aboutNote"></p>
+      <p class="label" style="margin-top:32px">Prestasi</p>
+      <ul class="awards" id="awards"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="karya" data-nav="project">
+  <div class="wrap">
+    <div class="sec-head" data-rv>
+      <div>
+        <p class="label"><b>02</b> Karya</p>
+        <h2>Lihat dulu karya kami.</h2>
+        <p class="sec-sub">Pilih kategorinya, klik karya untuk memutar videonya, lalu chat kami kalau kamu mau dibuatkan yang serupa.</p>
+      </div>
+    </div>
+    <div class="filters" data-rv>
+      <div class="chips" id="styleChips" role="group" aria-label="Kategori karya"></div>
+    </div>
+    <div class="cards" id="cards" data-rv></div>
+  </div>
+</section>
+
+<dialog class="dlg" id="dlg" aria-labelledby="dlTitle">
+  <div class="dlg-in">
+    <button class="dlg-x" id="dlX" type="button" aria-label="Tutup">×</button>
+    <div class="dl-left">
+      <div class="screen" id="dlScreen"></div>
+      <div class="dl-info">
+        <span class="tag" id="dlTag"></span>
+        <h3 id="dlTitle"></h3>
+        <p id="dlDesc"></p>
+      </div>
+    </div>
+    <div class="dl-right">
+      <h4 id="dlH">Pilih paket</h4>
+      <div class="opts" id="dlOpts" role="radiogroup" aria-label="Pilihan paket"></div>
+      <p class="dl-add" id="dlAdd"></p>
+      <a class="btn dl-cta" id="dlCta" target="_blank" rel="noopener"><span id="dlCtaText">Tanya lewat WhatsApp</span> <span class="arr" aria-hidden="true">→</span></a>
+      <p class="dl-note" id="dlNote"></p>
+    </div>
+  </div>
+</dialog>
+
+<section id="harga" data-nav="service">
+  <div class="wrap">
+    <div class="sec-head" data-rv>
+      <div>
+        <p class="label"><b>03</b> Harga</p>
+        <h2>Daftar harga, tanpa tebak-tebakan.</h2>
+        <p class="sec-sub">Semua paket sudah termasuk 2x revisi. Klik kartu paket untuk langsung chat dengan pesan yang sudah terisi.</p>
+      </div>
+      <div class="seg" id="pkSeg" role="group" aria-label="Jenis layanan"></div>
+    </div>
+    <div data-rv>
+      <p class="rate-note" id="rateNote"></p>
+      <div class="rates" id="rates"></div>
+      <p class="addons" id="addons"></p>
+    </div>
+  </div>
+</section>
+
+<section id="cara" data-nav="service">
+  <div class="wrap">
+    <div class="sec-head" data-rv>
+      <div>
+        <p class="label"><b id="stepNo">04</b> Cara pesan</p>
+        <h2>Empat langkah, semua lewat chat.</h2>
+      </div>
+    </div>
+    <ol class="steps" data-rv>
+      <li class="step"><span class="ico" aria-hidden="true">01</span><h3>Chat &amp; isi brief</h3><p>Ceritakan jenis video, durasi, deadline, dan gaya yang kamu suka.</p></li>
+      <li class="step"><span class="ico" aria-hidden="true">02</span><h3>Terima penawaran</h3><p>Harga final dan estimasi selesai dikirim, lalu bayar DP 50%.</p></li>
+      <li class="step"><span class="ico" aria-hidden="true">03</span><h3>Produksi &amp; revisi</h3><p>Draf dikirim untuk dicek, revisi maksimal dua kali.</p></li>
+      <li class="step"><span class="ico" aria-hidden="true">04</span><h3>Pelunasan &amp; file final</h3><p>Setelah lunas, file final dikirim lewat Google Drive.</p></li>
+    </ol>
+  </div>
+</section>
+</main>
+
+<footer class="closing" id="penutup" data-nav="contact">
+  <div class="wrap">
+    <h2 data-rv>Ada acara atau tugas yang butuh video?</h2>
+    <p>Slot pengerjaan terbatas tiap bulan, jadi lebih baik hubungi dari jauh-jauh hari.</p>
+    <a class="btn" id="ctaWa" target="_blank" rel="noopener">Chat di WhatsApp <span class="arr" aria-hidden="true">→</span></a>
+    <div class="ruler" aria-hidden="true"></div>
+    <div class="foot"><span>© <span id="yr"></span> <span id="footBrand"></span></span><span>Jasa edit video tugas &amp; after movie</span></div>
+  </div>
+</footer>
+
+<a class="fab" id="fab" target="_blank" rel="noopener">Chat WhatsApp</a>
+
+<script>
+/* =====================================================
+   EDIT BAGIAN INI SAJA — semua isi halaman dari sini
+   ===================================================== */
+const CONFIG = {
+  brand: "Creative MQ",
+  brandBy: "by Imran & Iqbal",
+  brandMark: "MQ",                // 2 huruf di bulatan kecil pada kartu karya
+  whatsapp: "6283121206863",      // GANTI: format 62..., tanpa + dan tanpa 0 di depan
+  showPrices: false,              // false = harga disembunyikan, hanya karya yang tampil. Ganti true untuk menampilkannya lagi
+
+  // dua bingkai foto (tanpa jabatan). Taruh file foto satu folder dengan index.html
+  leftName: "Iqbal",   leftPhoto: "iqbal.jpg", leftSticker: "📸",
+  rightName: "Imran",  rightPhoto: "imran.jpg", rightSticker: "🎬",
+
+  // arti "MQ" kalau ada (muncul di bawah nama brand). Kosongkan "" kalau tidak dipakai
+  brandMeaning: "",
+  // deskripsi di bawah nama brand
+  background: "Creative MQ dibuat oleh Imran dan Iqbal, dua teman yang sama-sama suka videografi dan fotografi. Dari kesukaan itu kami menerima jasa edit video untuk tugas kuliah dan after movie acara. Kami pernah meraih juara 2 Short Video Competition KST PTKI II 2026 dan juara 3 Lomba Video Spotlight Competition AICIS 2026.",
+
+  // bagian About
+  aboutText: "Kami berdua suka merekam dan menyunting gambar. Creative MQ lahir dari kesukaan itu, lalu kami bawa ke lomba dan sudah pulang dengan dua penghargaan.",
+  aboutNote: "Semua pertanyaan dan pesanan masuk lewat satu nomor WhatsApp, jadi kamu cukup chat sekali.",
+  aboutPhoto: "kami-berdua.jpg",  // foto berdua di bagian About (landscape lebih bagus, rasio 4:3)
+
+  // kalimat lucu yang muncul acak saat bingkai diklik/disentuh
+  leftQuotes: [
+    "Mau momenmu diabadikan? Chat aja! 📸",
+    "Chat dulu, nanti kita ngobrol idenya 💬",
+    "Acara kampusmu, kami yang rekam ✨",
+    "Santai, kami kerjakan serius 🎬"
+  ],
+  rightQuotes: [
+    "Cut, cut, cut... jadi deh! 🎬",
+    "Videomu enak ditonton sampai habis ✨",
+    "Satu frame, satu cerita 📸",
+    "Transisinya halus kayak mentega 🧈"
+  ],
+
+  // PORTOFOLIO: satu nama = satu folder di Drive. Satu baris { link: "..." } = satu video = satu kartu.
+  // Cara isi:
+  //   1) Di Drive, klik kanan videonya > Bagikan > Salin link, lalu tempel ke link: "..."
+  //      (link YouTube juga bisa. Tempel apa adanya, tidak perlu memotong ID)
+  //   2) Folder atau file harus dibagikan sebagai "Siapa saja yang memiliki link" (Viewer)
+  //   3) Baris yang link-nya kosong otomatis disembunyikan begitu sudah ada video yang terisi
+  // Opsional per video: title: "Judul", desc: "Deskripsi singkat", thumb: "sampul.jpg" (gambar sampul sendiri)
+  // Kartu tanpa title otomatis diberi judul "<nama folder> 1", "<nama folder> 2", dst.
+  portfolio: {
+    "After movie": [ { link: "https://drive.google.com/file/d/1RKzv9B5q0I-EMZRDWPPQcbTJU4FqIoJI/view?usp=sharing" } ],
+    "Have fun":    [ { link: "https://drive.google.com/file/d/1aElPDmBcwpvPHvK089JbYenhsrfEAIMh/view?usp=sharing" } ],
+    "Kenangan":    [ { link: "https://drive.google.com/file/d/1eZSeCEnE5L96Ba1I2p_MLXDveg-1FLSW/view?usp=sharing" } ],
+    "Lomba":       [ { link: "https://drive.google.com/file/d/1sN-VfZS6hs6FjPsS4qTTtn2fz1QQHNE5/view?usp=sharing" } ],
+    "Presentasi":  [ { link: "https://drive.google.com/file/d/1IEedApp0eYRIbOCAh8r-ZJoOgQe5hCwv/view?usp=sharing" } ],
+    "Promosi":     [ { link: "https://drive.google.com/file/d/19k6wQFKiKUj2WF2ALALfxdY_lJEA32dF/view?usp=sharing" } ],
+    "Trailer":     [ { link: "https://drive.google.com/file/d/1kWOm7biYT9q6MLKDTZTvuhacd65qXDYW/view?usp=sharing" } ]
+  },
+  // hanya dipakai kalau showPrices: true (menentukan daftar paket yang muncul). Folder yang tidak disebut = "tugas"
+  folderCat: { "After movie": "after", "Kenangan": "after", "Have fun": "after", "Trailer": "after" },
+
+  awards: [
+    { title: "Juara 2 Short Video Competition KST PTKI II", meta: "2026" },
+    { title: "Juara 3 Lomba Video Spotlight Competition AICIS", meta: "2026" }
+  ],
+
+  packages: {
+    tugas: {
+      label: "Tugas Video",
+      note: "Layanan jasa editing: bahan video (rekaman, naskah, ide) disediakan klien, kami yang menyuntingnya.",
+      items: [
+        { name: "Basic", desc: "Sampai 2 menit", price: 75000, features: ["Editing rapi + transisi", "Musik latar", "Teks / judul", "2x revisi"] },
+        { name: "Standar", desc: "Sampai 5 menit", price: 150000, pop: true, features: ["Editing lengkap + efek", "Musik & sound effect", "Teks / judul animasi", "2x revisi"] },
+        { name: "Plus", desc: "Sampai 8 menit", price: 250000, features: ["Editing lengkap + efek", "Color grading", "Subtitle dasar", "2x revisi"] }
+      ],
+      addons: "<b>Tambahan:</b> Subtitle +Rp 20.000–50.000 · Express (selesai 1 hari) +30–50%"
+    },
+    after: {
+      label: "After Movie",
+      note: "Kami datang ke acaramu, merekam, mewawancarai, lalu mengeditnya jadi video sinematik.",
+      items: [
+        { name: "Setengah Hari", desc: "Hasil 1–2 menit", price: 750000, features: ["Dokumentasi acara ±4 jam", "Editing sinematik", "Musik berlisensi bebas", "2x revisi"] },
+        { name: "Seharian", desc: "Hasil 2–3 menit", price: 1500000, pop: true, features: ["Dokumentasi acara seharian", "Editing sinematik", "Musik berlisensi bebas", "2x revisi"] },
+        { name: "Premium", desc: "Lengkap + wawancara", price: 2500000, features: ["Dokumentasi seharian", "Wawancara narasumber", "After movie + teaser 30 detik", "2x revisi"] }
+      ],
+      addons: "<b>Catatan:</b> Biaya transport di luar kota/area dihitung terpisah. Slot acara dipesan minimal 1–2 minggu sebelumnya."
+    }
+  }
+};
+/* ================= akhir bagian edit ================= */
+
+const $ = id => document.getElementById(id);
+const rp = n => "Rp " + n.toLocaleString("id-ID");
+const pad = n => String(n).padStart(2, "0");
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const wa = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- umum ---------- */
+document.title = `${CONFIG.brand} ${CONFIG.brandBy} — Jasa Edit Video`;
+const SHOW_PRICES = CONFIG.showPrices === true;
+$("heroTitle").textContent = CONFIG.brand;
+$("heroBy").textContent = CONFIG.brandBy;
+$("footBrand").textContent = `${CONFIG.brand} ${CONFIG.brandBy}`;
+$("yr").textContent = new Date().getFullYear();
+if (CONFIG.brandMeaning) $("nameMeaning").textContent = CONFIG.brandMeaning; else $("nameMeaning").hidden = true;
+$("bgText").textContent = CONFIG.background;
+const hello = `Halo ${CONFIG.brand}, saya mau tanya soal jasa edit videonya.`;
+if (!SHOW_PRICES){ $("stepNo").textContent = "03"; $("harga").hidden = true; document.querySelector('.pillnav a[data-k="service"]').setAttribute("href", "#cara"); }
+["heroWa","ctaWa","fab"].forEach(id => $(id).href = wa(hello));
+
+$("aboutText").textContent = CONFIG.aboutText;
+$("aboutNote").textContent = CONFIG.aboutNote;
+(function(){
+  const box = $("duoPhoto");
+  $("duoCap").textContent = `${CONFIG.rightName} & ${CONFIG.leftName}`;
+  const empty = () => { box.innerHTML = '<div class="ph-empty"><span>📷</span>Foto kami berdua di sini</div>'; };
+  if (!CONFIG.aboutPhoto){ empty(); return; }
+  const im = new Image();
+  im.alt = `Foto ${CONFIG.rightName} dan ${CONFIG.leftName} berdua`;
+  im.onload = () => { box.innerHTML = ""; box.appendChild(im); };
+  im.onerror = empty;
+  im.src = CONFIG.aboutPhoto;
+})();
+$("awards").innerHTML = CONFIG.awards.map(a => `<li><time>${esc(a.meta)}</time><span>${esc(a.title)}</span></li>`).join("");
+
+/* ---------- menu: sorot bagian yang sedang dilihat ---------- */
+(function(){
+  const links = [...document.querySelectorAll(".pillnav a")];
+  const setActive = k => links.forEach(a => {
+    const on = a.dataset.k === k;
+    a.classList.toggle("on", on);
+    if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+  });
+  links.forEach(a => a.addEventListener("click", () => setActive(a.dataset.k)));
+  const spy = new IntersectionObserver(en => en.forEach(x => { if (x.isIntersecting) setActive(x.target.dataset.nav); }),
+    { rootMargin: "-45% 0px -50% 0px" });
+  document.querySelectorAll("[data-nav]").forEach(el => spy.observe(el));
+})();
+
+/* ---------- pilihan jenis (teks bergaris bawah) ---------- */
+function seg(el, keys, labels, cb){
+  el.innerHTML = keys.map((k, i) => `<button type="button" data-k="${k}" aria-pressed="${i === 0}">${esc(labels[k])}</button>`).join("");
+  el.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    el.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    cb(b.dataset.k);
+  });
+  cb(keys[0]);
+}
+
+/* ---------- karya: galeri kartu (satu folder = satu kategori) ---------- */
+let styleKey = "all", lastCard = null;
+
+function parseLink(link){
+  const t = String(link || "").trim();
+  if (!t) return {};
+  if (/drive\.google\.com\/drive\/folders\//.test(t)){ console.warn("Link folder tidak bisa dipakai. Tempel link FILE video, bukan link folder:", t); return {}; }
+  let m;
+  if ((m = t.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/)([\w-]{11})/))) return { youtube: m[1] };
+  if ((m = t.match(/drive\.google\.com\/file\/d\/([\w-]+)/)) || (m = t.match(/[?&]id=([\w-]+)/))) return { drive: m[1] };
+  if (/^[\w-]{11}$/.test(t)) return { youtube: t };
+  if (/^[\w-]{20,}$/.test(t)) return { drive: t };
+  return {};
+}
+const ITEMS = (() => {
+  const all = Object.entries(CONFIG.portfolio).flatMap(([style, arr]) => arr.map((v, i) => ({
+    ...v, ...parseLink(v.link), style,
+    title: v.title || `${style} ${i + 1}`, desc: v.desc || "",
+    cat: (CONFIG.folderCat || {})[style] || "tugas"
+  })));
+  const filled = all.filter(v => v.youtube || v.drive);
+  return filled.length ? filled : all;   // belum ada yang diisi: tampilkan kartu contoh
+})();
+
+const minPrice = cat => Math.min(...CONFIG.packages[cat].items.map(p => p.price));
+const thumbSrc = v => v.thumb ? v.thumb
+  : v.youtube ? `https://img.youtube.com/vi/${encodeURIComponent(v.youtube)}/hqdefault.jpg`
+  : v.drive ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(v.drive)}&sz=w640` : "";
+const embedSrc = v => v.youtube ? `https://www.youtube.com/embed/${encodeURIComponent(v.youtube)}?autoplay=1&rel=0`
+  : v.drive ? `https://drive.google.com/file/d/${encodeURIComponent(v.drive)}/preview` : "";
+const NOSIG = `<div class="nosig"><b>Segera hadir</b>Video belum diunggah</div>`;
+const PLAYMARK = `<div class="nosig"><b>Video</b>Klik untuk memutar</div>`;
+
+function renderChips(){
+  const styles = [...new Set(ITEMS.map(v => v.style))];
+  if (styleKey !== "all" && !styles.includes(styleKey)) styleKey = "all";
+  $("styleChips").innerHTML = ["all", ...styles].map(k =>
+    `<button class="chip" type="button" data-k="${esc(k)}" aria-pressed="${k === styleKey}">${k === "all" ? "Semua" : esc(k)}</button>`).join("");
+  $("styleChips").hidden = styles.length < 2;
+}
+function renderCards(){
+  const list = ITEMS.map((v, i) => ({ v, i })).filter(x => styleKey === "all" || x.v.style === styleKey);
+  if (!list.length){ $("cards").innerHTML = `<p class="empty-note">Belum ada karya di kategori ini.</p>`; return; }
+  $("cards").innerHTML = list.map(({ v, i }) => {
+    const src = thumbSrc(v);
+    const price = SHOW_PRICES ? (v.from || minPrice(v.cat)) : 0;
+    return `<button class="vcard" type="button" data-i="${i}" aria-label="${esc(v.title)}${SHOW_PRICES ? ", mulai " + rp(price) : ""}. Buka detail">
+      <span class="vc-top"><span class="av" aria-hidden="true">${esc(CONFIG.brandMark)}</span><span class="vc-who"><b>${esc(CONFIG.brand)}</b><span>Portofolio</span></span></span>
+      <span class="thumb">${src ? `<img loading="lazy" src="${esc(src)}" alt="">` : NOSIG}<span class="vc-play" aria-hidden="true"></span></span>
+      <span class="vc-body">
+        <span class="vc-title">${esc(v.title)}</span>
+        <span class="tag">${esc(v.style)}</span>
+        ${SHOW_PRICES ? `<span class="vc-price"><small>Mulai</small><b>${rp(price)}</b></span>` : `<span class="vc-more">Lihat detail →</span>`}
+      </span>
+    </button>`;
+  }).join("");
+  // sampul gagal dimuat (mis. file Drive belum publik): tampilkan penanda, bukan gambar rusak
+  $("cards").querySelectorAll(".thumb img").forEach(im =>
+    im.addEventListener("error", () => { im.outerHTML = PLAYMARK; }, { once: true }));
+}
+renderChips(); renderCards();
+$("styleChips").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  styleKey = b.dataset.k; renderChips(); renderCards();
+});
+
+/* ---------- jendela detail: video + pilih paket + pesan ---------- */
+const dlg = $("dlg");
+let cur = null, curPk = 0;
+
+function mountPlayer(v){
+  const sc = $("dlScreen"), src = thumbSrc(v), embed = embedSrc(v);
+  if (!embed){ sc.innerHTML = NOSIG; return; }
+  sc.innerHTML = `${src ? `<img src="${esc(src)}" alt="">` : ""}<button class="play" type="button"><i></i>Putar video</button>`;
+  const im = sc.querySelector("img"); if (im) im.addEventListener("error", () => im.remove(), { once: true });
+  sc.querySelector(".play").addEventListener("click", () => {
+    sc.innerHTML = `<iframe src="${embed}" title="${esc(v.title)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+  });
+}
+function updateCta(){
+  if (!SHOW_PRICES){
+    $("dlCta").href = wa(`Halo ${CONFIG.brand}, saya tertarik dengan model "${cur.title}" (kategori ${cur.style}). Boleh tanya harga dan detailnya?`);
+    $("dlCtaText").textContent = "Tanya model ini lewat WhatsApp";
+    return;
+  }
+  const g = CONFIG.packages[cur.cat], p = g.items[curPk];
+  const msg = `Halo ${CONFIG.brand}, saya tertarik dengan model "${cur.title}" (kategori ${cur.style}). Saya mau pesan paket ${g.label} - ${p.name} (${p.desc}, ${rp(p.price)}). Boleh tanya detailnya?`;
+  $("dlCta").href = wa(msg);
+  $("dlCtaText").textContent = `Pesan paket ${p.name} · ${rp(p.price)}`;
+  $("dlOpts").querySelectorAll(".opt").forEach((o, i) => o.classList.toggle("on", i === curPk));
+}
+function openDetail(i, opener){
+  cur = ITEMS[i]; lastCard = opener;
+  $("dlTag").textContent = cur.style;
+  $("dlTitle").textContent = cur.title;
+  $("dlDesc").textContent = cur.desc; $("dlDesc").hidden = !cur.desc;
+  if (SHOW_PRICES){
+    const g = CONFIG.packages[cur.cat];
+    curPk = Math.max(0, g.items.findIndex(p => p.pop));
+    $("dlH").textContent = "Pilih paket";
+    $("dlOpts").setAttribute("role", "radiogroup");
+    $("dlAdd").hidden = false; $("dlAdd").innerHTML = g.addons;
+    $("dlNote").textContent = "Semua paket sudah termasuk 2x revisi. Pengerjaan dimulai setelah DP 50%.";
+    $("dlOpts").innerHTML = g.items.map((p, k) =>
+      `<label class="opt"><input type="radio" name="pk" value="${k}" ${k === curPk ? "checked" : ""}>
+         <span><b>${esc(p.name)}</b>${p.pop ? '<span class="picktag">Paling sering dipilih</span>' : ""}</span>
+         <span class="pr2">${rp(p.price)}</span>
+         <small>${esc(p.desc)} · ${p.features.map(esc).join(" · ")}</small>
+       </label>`).join("");
+  } else {
+    $("dlH").textContent = "Tertarik dengan model ini?";
+    $("dlOpts").removeAttribute("role");
+    $("dlAdd").hidden = true;
+    $("dlNote").textContent = "Harga dan estimasi waktu kami kirim lewat chat.";
+    $("dlOpts").innerHTML = `<p class="dl-ask">Chat kami untuk menanyakan harga, jadwal, dan detail pengerjaan. Pesannya sudah terisi otomatis dengan model yang kamu pilih.</p>`;
+  }
+  mountPlayer(cur); updateCta();
+  document.body.style.overflow = "hidden";
+  dlg.showModal(); dlg.scrollTop = 0;
+}
+$("cards").addEventListener("click", e => {
+  const c = e.target.closest(".vcard"); if (c) openDetail(+c.dataset.i, c);
+});
+$("dlOpts").addEventListener("change", e => { curPk = +e.target.value; updateCta(); });
+$("dlX").addEventListener("click", () => dlg.close());
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+dlg.addEventListener("close", () => {
+  $("dlScreen").innerHTML = "";            // hentikan video yang sedang diputar
+  document.body.style.overflow = "";
+  if (lastCard && document.contains(lastCard)) lastCard.focus();
+});
+
+/* ---------- harga ---------- */
+function renderPk(key){
+  const g = CONFIG.packages[key];
+  $("rateNote").textContent = g.note;
+  $("addons").innerHTML = g.addons;
+  $("rates").innerHTML = g.items.map((p, i) => {
+    const msg = `Halo ${CONFIG.brand}, saya mau pesan paket ${g.label} - ${p.name} (${p.desc}, ${rp(p.price)}). Boleh tanya detailnya?`;
+    return `<a class="rate" href="${wa(msg)}" target="_blank" rel="noopener">
+      <span class="ico" aria-hidden="true">${pad(i + 1)}</span>
+      <span class="go" aria-hidden="true">→</span>
+      <h3>${esc(p.name)}${p.pop ? '<span class="pick">Terlaris</span>' : ""}</h3>
+      <p class="sub">${esc(p.desc)}</p>
+      <p class="sub">${p.features.map(esc).join(" · ")}</p>
+      <div class="pr"><small>Mulai</small>${rp(p.price)}</div>
+    </a>`;
+  }).join("");
+}
+seg($("pkSeg"), ["tugas","after"], { tugas: CONFIG.packages.tugas.label, after: CONFIG.packages.after.label }, renderPk);
+
+/* ---------- dua bingkai interaktif (kiri & kanan) ---------- */
+(function(){
+  const emojis = ["❤️","✨","⭐","💛","🎬"];
+  const people = [
+    { slot: "frameL", name: CONFIG.leftName,  photo: CONFIG.leftPhoto,  sticker: CONFIG.leftSticker,  quotes: CONFIG.leftQuotes,  tape: "#e9d9a8", phase: 0 },
+    { slot: "frameR", name: CONFIG.rightName, photo: CONFIG.rightPhoto, sticker: CONFIG.rightSticker, quotes: CONFIG.rightQuotes, tape: "#d4361b", phase: 2.1 }
+  ];
+
+  const frames = people.map(p => {
+    const holder = $(p.slot);
+    holder.innerHTML = `
+      <div class="frame" role="button" tabindex="0" style="--tape:${p.tape}">
+        <div class="swing">
+          <i class="nail"></i>
+          <svg class="strings" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="100" y1="2" x2="30" y2="40"/><line x1="100" y1="2" x2="170" y2="40"/>
+          </svg>
+          <figure class="polaroid">
+            <div class="ph">
+              <div class="phimg"></div>
+              <div class="nm"><b></b></div>
+            </div>
+            <span class="sticker" aria-hidden="true">${p.sticker}</span>
+          </figure>
+        </div>
+        <div class="bubble" role="status" aria-live="polite"></div>
+      </div>`;
+    const el = holder.firstElementChild;
+    el.querySelector("b").textContent = p.name;
+    el.setAttribute("aria-label", `Colek bingkai ${p.name}`);
+    const box = el.querySelector(".phimg");
+    const empty = () => { box.innerHTML = `<div class="ph-empty"><span>${p.sticker}</span>Foto ${esc(p.name)} di sini</div>`; };
+    if (!p.photo) empty();
+    else {
+      const im = new Image();
+      im.alt = `Foto ${p.name}`;
+      im.onload = () => { box.innerHTML = ""; box.appendChild(im); };
+      im.onerror = empty;
+      im.src = p.photo;
+    }
+    return { el, p, sw: el.querySelector(".swing"), bubble: el.querySelector(".bubble"), a: 0, v: 0, qi: -1, timer: 0 };
+  });
+
+  const kick = (f, dir, power) => { f.v = Math.max(-2.2, Math.min(2.2, f.v + dir * power)); };
+
+  function hit(f, e, fromKey){
+    const r = f.el.getBoundingClientRect();
+    const px = fromKey ? r.width / 2 : e.clientX - r.left;
+    const py = fromKey ? r.height / 2 : e.clientY - r.top;
+    const dir = fromKey ? (Math.random() < .5 ? -1 : 1) : (px < r.width / 2 ? 1 : -1);
+    kick(f, dir, 1.4);
+
+    const q = f.p.quotes || [];
+    if (q.length){
+      let n; do { n = Math.floor(Math.random() * q.length); } while (n === f.qi && q.length > 1);
+      f.qi = n;
+      f.bubble.textContent = q[n];
+      f.bubble.classList.add("show");
+      clearTimeout(f.timer);
+      f.timer = setTimeout(() => f.bubble.classList.remove("show"), 2600);
+    }
+    if (!reduce){
+      for (let k = 0; k < 4; k++){
+        const s = document.createElement("span");
+        s.className = "pop";
+        s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        s.style.left = px + "px";
+        s.style.top = py + "px";
+        s.style.animationDelay = (k * 70) + "ms";
+        s.style.setProperty("--dx", (Math.random() * 70 - 35) + "px");
+        s.addEventListener("animationend", () => s.remove());
+        f.el.appendChild(s);
+      }
+    }
+    $("hint").classList.add("gone");
+  }
+
+  frames.forEach(f => {
+    f.el.addEventListener("pointerdown", e => hit(f, e, false));
+    f.el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " "){ e.preventDefault(); hit(f, e, true); }
+    });
+    f.el.addEventListener("pointerenter", e => {
+      if (e.pointerType !== "mouse") return;
+      const r = f.el.getBoundingClientRect();
+      kick(f, e.clientX - r.left < r.width / 2 ? 1 : -1, .4);
+    });
+  });
+
+  // ayunan: pegas + redaman, ditambah goyangan halus bawaan
+  if (reduce){
+    frames.forEach(f => { f.sw.style.transform = "rotate(-1.5deg)"; });
+    return;
+  }
+  let last = performance.now(), visible = true;
+  new IntersectionObserver(en => { visible = en[0].isIntersecting; }).observe($("top"));
+  function tick(now){
+    const dt = Math.min((now - last) / 16.667, 3);
+    last = now;
+    if (visible && !document.hidden){
+      frames.forEach(f => {
+        f.v += -0.0027 * f.a * dt;
+        f.v *= Math.pow(0.985, dt);
+        f.a += f.v * dt;
+        const amb = 1.8 * Math.sin(now / 1000 * 3 + f.p.phase);
+        f.sw.style.transform = `rotate(${(f.a + amb).toFixed(2)}deg)`;
+      });
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ---------- muncul pelan saat discroll ---------- */
+if (!reduce && "IntersectionObserver" in window){
+  const io = new IntersectionObserver(en => en.forEach(x => {
+    if (x.isIntersecting){ x.target.classList.add("in"); io.unobserve(x.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll("[data-rv]").forEach(el => { el.classList.add("rv"); io.observe(el); });
+}
+
+/* ---------- tombol chat melayang: tampil setelah beranda, sembunyi di penutup ---------- */
+(function(){
+  const fab = $("fab");
+  let inHero = true, inEnd = false;
+  const upd = () => fab.classList.toggle("show", !inHero && !inEnd);
+  new IntersectionObserver(en => { inHero = en[0].isIntersecting; upd(); }).observe($("top"));
+  new IntersectionObserver(en => { inEnd = en[0].isIntersecting; upd(); }).observe($("penutup"));
+})();
+</script>
+</body>
+</html>
