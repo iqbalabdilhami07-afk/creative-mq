@@ -187,12 +187,38 @@ h2{font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-.03em}
 .vc-price b{font-size:1rem;font-weight:700;color:var(--ember2)}
 .vc-more{margin-top:auto;padding-top:6px;text-align:right;font-size:.8rem;font-weight:600;transition:color .2s}
 .vcard:hover .vc-more{color:var(--ember2)}
+.rows{display:grid;gap:clamp(28px,4vw,42px)}
+.row-head{display:flex;align-items:flex-end;gap:12px;margin-bottom:12px}
+.row-head h3{font-size:1.1rem;font-weight:700;letter-spacing:-.02em}
+.row-head .rcount{flex:1;font-size:.78rem;color:var(--muted);padding-bottom:2px}
+.rn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;font-size:1rem;transition:background .2s,color .2s}
+.rn:hover{background:#fff;color:var(--ink)}
+@media(hover:none){.rn{display:none}}
+.lane{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:8px var(--gutter) 14px;margin:0 calc(var(--gutter)*-1);scroll-padding-left:var(--gutter);scrollbar-width:none}
+.lane::-webkit-scrollbar{display:none}
+.lane .vcard{flex:0 0 min(80%,290px);height:auto;scroll-snap-align:start}
+.swipe-hint{font-size:.76rem;color:var(--muted);margin:-6px 0 14px}
+@media(hover:hover){.swipe-hint{display:none}}
+.dl-wa{margin-top:14px;font-size:.84rem}
+.dlg.solo{width:min(720px,calc(100% - 24px))}
+.dlg.solo .dl-right{display:none}
+.dlg.solo .dl-left{padding-top:58px}
+@media(max-width:819px){.dl-left{padding-top:58px}}
+.dlg.solo .dlg-x{top:10px;right:10px}
+.dlg.solo .dl-in,.dlg.solo .dlg-in{grid-template-columns:1fr}
+.dl-wa{display:none}
+.dlg.solo .dl-wa{display:inline-flex}
+.openlink{display:inline-block;margin-top:12px;font-size:.8rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.openlink:hover{color:#fff}
 .empty-note{padding:40px 0;color:var(--muted)}
 
 .screen{position:relative;aspect-ratio:16/9;background:#050922;overflow:hidden}
 .screen>img{width:100%;height:100%;object-fit:cover;opacity:.92}
 .screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .play{position:absolute;left:16px;bottom:16px;display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--ember),var(--ember2));color:var(--on);padding:11px 18px 11px 14px;border-radius:999px;font-weight:700;font-size:.85rem}
+.plays{position:absolute;left:12px;right:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:8px}
+.plays .play{position:static}
+.play.alt{background:rgba(5,9,30,.82);color:#fff;border:1px solid rgba(255,255,255,.4);padding:11px 16px}
 .play i{width:0;height:0;border-left:11px solid currentColor;border-top:7px solid transparent;border-bottom:7px solid transparent}
 .nosig{position:absolute;inset:0;display:grid;place-content:center;gap:4px;text-align:center;color:#9aa9c9;font-size:.82rem;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 2px,transparent 2px 4px),#050922}
 .nosig b{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-weight:600}
@@ -350,7 +376,8 @@ footer{padding:clamp(30px,5vw,60px) 0 28px}
       <p class="sec-sub">Pilih kategorinya, klik karya untuk memutar videonya, lalu chat kami kalau kamu mau dibuatkan yang serupa.</p>
     </div>
     <div class="chips" id="styleChips" role="group" aria-label="Kategori karya" data-rv></div>
-    <div class="cards" id="cards" data-rv></div>
+    <p class="swipe-hint" id="swipeHint">Geser ke samping untuk melihat video lainnya →</p>
+    <div id="cards" data-rv></div>
   </div>
 </section>
 
@@ -363,6 +390,8 @@ footer{padding:clamp(30px,5vw,60px) 0 28px}
         <span class="tag" id="dlTag"></span>
         <h3 id="dlTitle"></h3>
         <p id="dlDesc"></p>
+        <a class="btn dl-wa" id="dlWa" target="_blank" rel="noopener">Tanya model ini lewat WhatsApp <span class="dot" aria-hidden="true">→</span></a><br>
+        <a class="openlink" id="dlOpen" target="_blank" rel="noopener" hidden>Video tidak muncul? Buka di Google Drive ↗</a>
       </div>
     </div>
     <div class="dl-right">
@@ -471,13 +500,13 @@ const CONFIG = {
   // Opsional per video: title: "Judul", desc: "Deskripsi singkat", thumb: "sampul.jpg" (gambar sampul sendiri)
   // Kartu tanpa title otomatis diberi judul "<nama folder> 1", "<nama folder> 2", dst.
   portfolio: {
-    "After movie": [ { link: "https://drive.google.com/file/d/1RKzv9B5q0I-EMZRDWPPQcbTJU4FqIoJI/view?usp=sharing" } ],
-    "Have fun":    [ { link: "https://drive.google.com/file/d/1aElPDmBcwpvPHvK089JbYenhsrfEAIMh/view?usp=sharing" } ],
-    "Kenangan":    [ { link: "https://drive.google.com/file/d/1eZSeCEnE5L96Ba1I2p_MLXDveg-1FLSW/view?usp=sharing" } ],
-    "Lomba":       [ { link: "https://drive.google.com/file/d/1sN-VfZS6hs6FjPsS4qTTtn2fz1QQHNE5/view?usp=sharing" } ],
-    "Presentasi":  [ { link: "https://drive.google.com/file/d/1IEedApp0eYRIbOCAh8r-ZJoOgQe5hCwv/view?usp=sharing" } ],
-    "Promosi":     [ { link: "https://drive.google.com/file/d/19k6wQFKiKUj2WF2ALALfxdY_lJEA32dF/view?usp=sharing" } ],
-    "Trailer":     [ { link: "https://drive.google.com/file/d/1kWOm7biYT9q6MLKDTZTvuhacd65qXDYW/view?usp=sharing" } ]
+    "After movie": [ { link: "https://drive.google.com/file/d/1RKzv9B5q0I-EMZRDWPPQcbTJU4FqIoJI/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1zHlSRY4DWo7PLcZmavQ-yDkKV7mMWfTa/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1r2vHhSsCPC6gCSj2nw-lkhhTAGB6XNYF/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1TbMHIaJvvWsX8uBZr7zOPcIhSdnurk_r/view?usp=sharing" } ],
+    "Have fun": [ { link: "https://drive.google.com/file/d/1aElPDmBcwpvPHvK089JbYenhsrfEAIMh/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1lXs6Zd0VsRCyVOoVObcmp169zkU1Xqs4/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1Iv6yoCtmHKlASRV8MubTrytGMgIKQZ6e/view?usp=sharing" } ],
+    "Kenangan": [ { link: "https://drive.google.com/file/d/1eZSeCEnE5L96Ba1I2p_MLXDveg-1FLSW/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1aKglkBlA0yUtaSqo-NwktCVCCBaIcUTL/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1UhQ_t72aZLU_BTmUdjfNdNP3nmy834cw/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1azMzyZzJOVVGtoZKketsjRV3jOB8IMIr/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1qQIi1r6PxWmRujY0uxhlR9uSBotlBXLE/view?usp=sharing" } ],
+    "Lomba": [ { link: "https://drive.google.com/file/d/1sN-VfZS6hs6FjPsS4qTTtn2fz1QQHNE5/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1czzo1C-6vjCxbMfMsPZKHl5wnfm-pbYf/view?usp=sharing" } ],
+    "Presentasi": [ { link: "https://drive.google.com/file/d/1IEedApp0eYRIbOCAh8r-ZJoOgQe5hCwv/view?usp=sharing" }, { link: "https://drive.google.com/file/d/14GGYe_9GyXFjwj4Mcl4b_qOvmgNffu4d/view?usp=sharing" } ],
+    "Promosi": [ { link: "https://drive.google.com/file/d/19k6wQFKiKUj2WF2ALALfxdY_lJEA32dF/view?usp=sharing" } ],
+    "Trailer": [ { link: "https://drive.google.com/file/d/1kWOm7biYT9q6MLKDTZTvuhacd65qXDYW/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1I8QRz7QEBmzp0zMQQ00Y7hv5EPB8t4j1/view?usp=sharing" }, { link: "https://drive.google.com/file/d/1y57YElgUCQ2mNRt-KXF6ZYoM1ToIbB5X/view?usp=sharing" } ]
   },
   // hanya dipakai kalau showPrices: true (menentukan daftar paket yang muncul). Folder yang tidak disebut = "tugas"
   folderCat: { "After movie": "after", "Kenangan": "after", "Have fun": "after", "Trailer": "after" },
@@ -628,13 +657,10 @@ function renderChips(){
     `<button class="chip" type="button" data-k="${esc(k)}" aria-pressed="${k === styleKey}">${k === "all" ? "Semua" : esc(k)}</button>`).join("");
   $("styleChips").hidden = styles.length < 2;
 }
-function renderCards(){
-  const list = ITEMS.map((v, i) => ({ v, i })).filter(x => styleKey === "all" || x.v.style === styleKey);
-  if (!list.length){ $("cards").innerHTML = `<p class="empty-note">Belum ada karya di kategori ini.</p>`; return; }
-  $("cards").innerHTML = list.map(({ v, i }) => {
-    const src = thumbSrc(v);
-    const price = SHOW_PRICES ? (v.from || minPrice(v.cat)) : 0;
-    return `<button class="vcard" type="button" data-i="${i}" aria-label="${esc(v.title)}${SHOW_PRICES ? ", mulai " + rp(price) : ""}. Buka detail">
+function cardHTML(v, i){
+  const src = thumbSrc(v);
+  const price = SHOW_PRICES ? (v.from || minPrice(v.cat)) : 0;
+  return `<button class="vcard" type="button" data-i="${i}" aria-label="${esc(v.title)}${SHOW_PRICES ? ", mulai " + rp(price) : ""}. Buka detail">
       <span class="vc-top"><span class="av" aria-hidden="true">${esc(CONFIG.brandMark)}</span><span class="vc-who"><b>${esc(CONFIG.brand)}</b><span>Portofolio</span></span></span>
       <span class="thumb">${src ? `<img loading="lazy" src="${esc(src)}" alt="">` : NOSIG}<span class="vc-play" aria-hidden="true"></span></span>
       <span class="vc-body">
@@ -643,9 +669,28 @@ function renderCards(){
         ${SHOW_PRICES ? `<span class="vc-price"><small>Mulai</small><b>${rp(price)}</b></span>` : `<span class="vc-more">Lihat detail →</span>`}
       </span>
     </button>`;
-  }).join("");
+}
+function renderCards(){
+  const box = $("cards"), all = styleKey === "all";
+  box.classList.toggle("rows", all); box.classList.toggle("cards", !all);
+  $("swipeHint").hidden = !all;
+  if (all){
+    // semua folder: tiap folder satu baris yang bisa digeser ke samping
+    const groups = {};
+    ITEMS.forEach((v, i) => (groups[v.style] = groups[v.style] || []).push({ v, i }));
+    box.innerHTML = Object.entries(groups).map(([style, list]) => `
+      <div class="row">
+        <div class="row-head"><h3>${esc(style)}</h3><span class="rcount">${list.length} video</span>
+          ${list.length > 1 ? `<button class="rn" type="button" data-d="-1" aria-label="Geser ke kiri">←</button><button class="rn" type="button" data-d="1" aria-label="Geser ke kanan">→</button>` : ""}
+        </div>
+        <div class="lane">${list.map(x => cardHTML(x.v, x.i)).join("")}</div>
+      </div>`).join("");
+  } else {
+    const list = ITEMS.map((v, i) => ({ v, i })).filter(x => x.v.style === styleKey);
+    box.innerHTML = list.length ? list.map(x => cardHTML(x.v, x.i)).join("") : `<p class="empty-note">Belum ada karya di kategori ini.</p>`;
+  }
   // sampul gagal dimuat (mis. file Drive belum publik): tampilkan penanda, bukan gambar rusak
-  $("cards").querySelectorAll(".thumb img").forEach(im =>
+  box.querySelectorAll(".thumb img").forEach(im =>
     im.addEventListener("error", () => { im.outerHTML = PLAYMARK; }, { once: true }));
 }
 renderChips(); renderCards();
@@ -678,13 +723,17 @@ let cur = null, curPk = 0;
 function mountPlayer(v){
   const sc = $("dlScreen"), src = thumbSrc(v), embed = embedSrc(v);
   if (!embed){ sc.innerHTML = NOSIG; return; }
-  sc.innerHTML = `${src ? `<img src="${esc(src)}" alt="">` : ""}<button class="play" type="button"><i></i>Putar video</button>`;
+  // di HP, pemutar Drive yang kecil sering tidak maksimal: tawarkan juga buka layar penuh di Drive/YouTube
+  const narrow = matchMedia("(max-width: 700px)").matches;
+  const full = v.drive ? `https://drive.google.com/file/d/${encodeURIComponent(v.drive)}/view` : `https://youtu.be/${encodeURIComponent(v.youtube)}`;
+  sc.innerHTML = `${src ? `<img src="${esc(src)}" alt="">` : ""}<div class="plays"><button class="play" type="button"><i></i>Putar di sini</button>${narrow ? `<a class="play alt" href="${full}" target="_blank" rel="noopener">Layar penuh ↗</a>` : ""}</div>`;
   const im = sc.querySelector("img"); if (im) im.addEventListener("error", () => im.remove(), { once: true });
-  sc.querySelector(".play").addEventListener("click", () => {
+  sc.querySelector("button.play").addEventListener("click", () => {
     sc.innerHTML = `<iframe src="${embed}" title="${esc(v.title)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
   });
 }
 function updateCta(){
+  setTimeout(() => { $("dlWa").href = $("dlCta").href; }, 0);
   if (!SHOW_PRICES){
     $("dlCta").href = wa(`Halo ${CONFIG.brand}, saya tertarik dengan model "${cur.title}" (kategori ${cur.style}). Boleh tanya harga dan detailnya?`);
     $("dlCtaText").textContent = "Tanya model ini lewat WhatsApp";
@@ -701,6 +750,7 @@ function openDetail(i, opener){
   $("dlTag").textContent = cur.style;
   $("dlTitle").textContent = cur.title;
   $("dlDesc").textContent = cur.desc; $("dlDesc").hidden = !cur.desc;
+  dlg.classList.toggle("solo", !SHOW_PRICES);   // tanpa harga: satu tombol WhatsApp saja, di bawah judul
   if (SHOW_PRICES){
     const g = CONFIG.packages[cur.cat];
     curPk = Math.max(0, g.items.findIndex(p => p.pop));
@@ -721,11 +771,20 @@ function openDetail(i, opener){
     $("dlNote").textContent = "Harga dan estimasi waktu kami kirim lewat chat.";
     $("dlOpts").innerHTML = `<p class="dl-ask">Chat kami untuk menanyakan harga, jadwal, dan detail pengerjaan. Pesannya sudah terisi otomatis dengan model yang kamu pilih.</p>`;
   }
+  const ext = cur.drive ? `https://drive.google.com/file/d/${encodeURIComponent(cur.drive)}/view` : cur.youtube ? `https://youtu.be/${encodeURIComponent(cur.youtube)}` : "";
+  $("dlOpen").hidden = !ext; if (ext) $("dlOpen").href = ext;
+  $("dlOpen").textContent = cur.youtube ? "Video tidak muncul? Buka di YouTube ↗" : "Video tidak muncul? Buka di Google Drive ↗";
   mountPlayer(cur); updateCta();
   document.body.style.overflow = "hidden";
   dlg.showModal(); dlg.scrollTop = 0;
 }
 $("cards").addEventListener("click", e => {
+  const n = e.target.closest(".rn");
+  if (n){
+    const lane = n.closest(".row").querySelector(".lane");
+    lane.scrollBy({ left: +n.dataset.d * lane.clientWidth * .8, behavior: reduce ? "auto" : "smooth" });
+    return;
+  }
   const c = e.target.closest(".vcard"); if (c) openDetail(+c.dataset.i, c);
 });
 $("dlOpts").addEventListener("change", e => { curPk = +e.target.value; updateCta(); });
